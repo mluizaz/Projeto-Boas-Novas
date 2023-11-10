@@ -134,3 +134,27 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('myForm');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch('process_form.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+      // Exiba a resposta do servidor, se necessário
+      console.log(data);
+    })
+    .catch(error => {
+      // Lidere com erros, se necessário
+      console.error('Erro durante o envio do formulário:', error);
+    });
+  });
+});
